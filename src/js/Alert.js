@@ -9,7 +9,7 @@ apply the background and foreground colors to it specified in the alert.
 */
 
 export default class Alert {
-    constructor(dataSourceUrl = "./json/alerts.json") {
+    constructor(dataSourceUrl = "/json/alerts.json") {
       this.dataSourceUrl = dataSourceUrl;
     }
   
