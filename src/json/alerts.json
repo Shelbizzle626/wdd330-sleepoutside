@@ -1,0 +1,18 @@
+[
+    {
+      "message": "You have added a backpack(s) to the cart.",
+      "background": "darkblue",
+      "color": "white"
+    },
+    {
+        "message": "You have added a tent(s) to the cart.",
+        "background": "red",
+        "color": "white"
+    },
+    {
+        "message": "You have added a sleeping bag(s) to the cart.",
+        "background": "yellow",
+        "color": "black"
+    }
+]
+  
