@@ -13,6 +13,22 @@ export function getLocalStorage(key) {
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
+
+// update the number displayed beside each cart icon
+export function updateCartCount() {
+  const cartItems = getLocalStorage("so-cart") || [];
+  const itemCount = cartItems.length;
+
+  document.querySelectorAll(".cart-count").forEach((count) => {
+    count.textContent = itemCount;
+    count.hidden = itemCount === 0;
+    count.setAttribute(
+      "aria-label",
+      `${itemCount} item${itemCount === 1 ? "" : "s"} in cart`,
+    );
+  });
+}
+
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
