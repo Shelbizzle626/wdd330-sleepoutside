@@ -4,6 +4,18 @@ function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
+
+  if (cartItems.length > 0) {
+    let total = 0;
+
+    for(const item of cartItems) {
+      total += Number(item.FinalPrice);
+    }
+
+    document.querySelector(".cart-total").textContent = `Total: $${total.toFixed(2)}`;
+
+    document.querySelector(".cart-footer").classList.remove("hide");
+  }
 }
 
 function cartItemTemplate(item) {
