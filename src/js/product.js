@@ -24,10 +24,10 @@ function renderDiscountIndicator(product) {
   const retail = Number(product.SuggestedRetailPrice);
   const final = Number(product.FinalPrice);
 
-  if (!(retail>final)) return;
+  if (!(retail > final)) return;
 
-  const percentOff = Math.round((1- final / retail) *100);
-  const saved = (retail - final) . toFixed(2);
+  const percentOff = Math.round((1 - final / retail) * 100);
+  const saved = (retail - final).toFixed(2);
 
   const indicator = document.createElement("div");
   indicator.className = "discount-indicator";
@@ -46,7 +46,7 @@ async function showDiscount() {
   const product = await dataSource.findProductById(id);
   if (product) renderDiscountIndicator(product);
 }
- 
+
 
 
 // add listener to Add to Cart button
