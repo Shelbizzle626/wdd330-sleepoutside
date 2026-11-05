@@ -3,7 +3,7 @@ import {
     getLocalStorage,
     updateCartCount,
   } from "./utils.mjs";
-  import ProductData from "./ProductData.mjs";
+  //import ProductData from "./ProductData.mjs";
 
 export default class ProductDetails {
 
@@ -12,23 +12,21 @@ export default class ProductDetails {
         this.product = {};
         this.dataSource = dataSource;
     }
-    
+
     async init() {
-        // get the product details using the id from the URL
         this.product = await this.dataSource.findProductById(this.productId);
-        // build the page with those details
         this.renderProductDetails();
-        // the button exists now, so attach the listener
-        // .bind(this) keeps "this" pointing at the class, not the button
         document
             .getElementById("addToCart")
             .addEventListener("click", this.addProductToCart.bind(this));
+        updateCartCount();
     }
 
     addProductToCart() {
         const cartItems = getLocalStorage("so-cart") || [];
         cartItems.push(this.product);
         setLocalStorage("so-cart", cartItems);
+        updateCartCount(); 
     }
 
     renderProductDetails() {
@@ -45,6 +43,8 @@ export default class ProductDetails {
       </div>
     `;
     }
+
+    
 }
 
 
