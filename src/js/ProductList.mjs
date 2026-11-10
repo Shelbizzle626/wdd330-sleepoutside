@@ -19,9 +19,16 @@ export default class ProductList {
   }
 
   async init() {
-    this.products = await this.dataSource.getData();
+    const list = await this.dataSource.getData();
+
+    // Filter products (from main)
+    const allowed = ["880RR", "985RF", "985PR", "344YJ"];
+    this.products = list.filter((product) => allowed.includes(product.Id));
+
+    // Display products
     this.renderList(this.products);
 
+    // Add sorting (from your branch)
     document.querySelector("#product-sort").addEventListener("change", (event) => {
       this.sortList(event.target.value);
     });
