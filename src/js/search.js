@@ -21,55 +21,45 @@ function productCardTemplate(product) {
 }
 
 async function searchProducts() {
-  const query = new URLSearchParams(window.location.search).get("q")?.trim().toLowerCase();
+  const params = new URLSearchParams(window.location.search);
+  const query = params.get("q")?.trim().toLowerCase();
 
   const heading = document.querySelector("#search-heading");
   const message = document.querySelector("#search-message");
   const productList = document.querySelector(".product-list");
 
   if (!query) {
-    message.textContent = "Enter a product category to search.";
+    message.textContent = "Enter a product name.";
     return;
   }
 
   heading.textContent = `Results for “${query}”`;
-  message.textContent = "Loading products…";
+  message.textContent = "Loading products...";
 
   try {
-    const responses = await Promise.all(
-      categories.map((category) =>
-        fetch(`${baseURL}products/search/${encodeURIComponent(category)}`),
-      ),
-    );
+    let allProducts = [];
 
-    if (responses.some((response) => !response.ok)) {
-      throw new Error("One or more product requests failed.");
+    for (const category of categories) {
+      const response = await fetch(`${baseURL}products/search/${category}`);
+
+      if (!response.ok) {
+        throw new Error("Unable to retrieve products.");
+      }
+
+      const data = await response.json();
+      allProducts = allProducts.concat(data.Result);
     }
 
-    const data = await Promise.all(
-      responses.map((response) => response.json()),
-    );
-    const allProducts = data.flatMap((category) => category.Result ?? []);
-    const products = allProducts.filter((product) => {
-      const searchableText = [
-        product.Name,
-        product.NameWithoutBrand,
-        product.Brand?.Name,
-        product.Category,
-        product.Id,
-      ]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase();
-
-      return searchableText.includes(query);
+    const matches = allProducts.filter(function (product) {
+      return product.Name.toLowerCase().includes(query);
     });
 
-    message.textContent = products.length === 0 ? "No products were found." : `${products.length} products found.`;
-
-    productList.innerHTML = products.map(productCardTemplate).join("");
+    message.textContent =
+      matches.length === 0
+        ? "No products were found."
+        : `${matches.length} products found.`;
+    productList.innerHTML = matches.map(productCardTemplate).join("");
   } catch (error) {
-    console.error(error);
     message.textContent = "Unable to retrieve search results.";
   }
 }
