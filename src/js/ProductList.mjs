@@ -19,11 +19,35 @@ export default class ProductList {
   }
 
   async init() {
-    const list = await this.dataSource.getData();
-    this.renderList(list);
+    this.products = await this.dataSource.getData();
+    this.renderList(this.products);
+
+    document.querySelector("#product-sort").addEventListener("change", (event) => {
+      this.sortList(event.target.value);
+    });
+  }
+
+  sortList(sortBy) {
+    const sortedProducts = [...this.products];
+
+    if (sortBy === "name") {
+      sortedProducts.sort((a, b) =>
+        a.NameWithoutBrand.localeCompare(b.NameWithoutBrand)
+      );
+    } else if (sortBy === "price") {
+      sortedProducts.sort((a, b) => a.FinalPrice - b.FinalPrice);
+    }
+
+    this.renderList(sortedProducts);
   }
 
   renderList(list) {
-    renderListWithTemplate(productCardTemplate, this.listElement, list);
+    renderListWithTemplate(
+      productCardTemplate,
+      this.listElement,
+      list,
+      "afterbegin",
+      true
+    );
   }
 }
