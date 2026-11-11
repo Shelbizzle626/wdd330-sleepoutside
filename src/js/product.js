@@ -16,16 +16,21 @@ function animateCartIcon() {
 
 function addProductToCart(product) {
   const cart = getLocalStorage("so-cart") || [];
-  cart.push(product);
+
+  // Is this product already in the cart?
+  const existing = cart.find((item) => item.Id === product.Id);
+
+  if (existing) {
+    // Yes: add 1 to its quantity
+    existing.Quantity = (Number(existing.Quantity) || 1) + 1;
+  } else {
+    // No: add it with a quantity of 1
+    cart.push({ ...product, Quantity: 1 });
+  }
+
   setLocalStorage("so-cart", cart);
   updateCartCount();
   animateCartIcon();
-}
-// add to cart button event handler
-async function addToCartHandler(e) {
-  const product = await dataSource.findProductById(e.target.dataset.id);
-  if (!product) return;
-  addProductToCart(product);
 }
 
 function renderDiscountIndicator(product) {
@@ -41,7 +46,7 @@ function renderDiscountIndicator(product) {
   indicator.className = "discount-indicator";
   indicator.innerHTML = `<span class = "discount-badge"> ${percentOff}% OFF</span>
   <span class= "discount-savings">You save $${saved}</span>
-  <div class = "discount-bar" role="img" aria-label =${percentOff}% discount">
+  <div class = "discount-bar" role="img" aria-label ="${percentOff}% discount">
   <div class ="discount-bar-fill" style="width: ${percentOff}%"></div></div>`;
 
   const priceEl = document.querySelector(

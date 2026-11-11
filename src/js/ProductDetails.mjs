@@ -23,10 +23,21 @@ export default class ProductDetails {
     }
 
     addProductToCart() {
-        const cartItems = getLocalStorage("so-cart") || [];
-        cartItems.push(this.product);
-        setLocalStorage("so-cart", cartItems);
-        updateCartCount(); 
+      const cartItems = getLocalStorage("so-cart") || [];
+      // Is this product already in the cart?
+      const existing = cartItems.find((item) => item.Id === this.product.ID);
+
+      if (existing) {
+        //Yes: add 1 to it's quantity
+        existing.Quantity = (Number(esixting.Quantity) || 1) + 1;
+      }
+      else {
+        // No: add it with a quantity of 1
+        cartItems.push({ ...this.product, Quantity: 1 });
+      }
+
+      setLocalStorage("so-cart", cartItems);
+      updateCartCount();
     }
 
     renderProductDetails() {
