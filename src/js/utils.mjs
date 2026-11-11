@@ -17,7 +17,11 @@ export function setLocalStorage(key, data) {
 // update the number displayed beside each cart icon
 export function updateCartCount() {
   const cartItems = getLocalStorage("so-cart") || [];
-  const itemCount = cartItems.length;
+
+  let itemCount = 0;
+  for (const item of cartItems) {
+    itemCount += Number(item.Quantity) || 1;
+  }
 
   document.querySelectorAll(".cart-count").forEach((count) => {
     count.textContent = itemCount;
@@ -45,7 +49,7 @@ export function getParam(param) {
   return product;
 }
 
-export function renderListWithTemplate(templateFn,  parentElement, list, position = "afterbegin", clear = false,) {
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false,) {
   const htmlStrings = list.map(templateFn);
   if (clear) {
     parentElement.innerHTML = "";
