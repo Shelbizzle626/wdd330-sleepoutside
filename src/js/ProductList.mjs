@@ -20,12 +20,41 @@ export default class ProductList {
 
   async init() {
     const list = await this.dataSource.getData();
+
+    // Filter products (from main)
     const allowed = ["880RR", "985RF", "985PR", "344YJ"];
-    const filtered = list.filter((product) => allowed.includes(product.Id));
-    this.renderList(filtered);
+    this.products = list.filter((product) => allowed.includes(product.Id));
+
+    // Display products
+    this.renderList(this.products);
+
+    // Add sorting (from your branch)
+    document.querySelector("#product-sort").addEventListener("change", (event) => {
+      this.sortList(event.target.value);
+    });
+  }
+
+  sortList(sortBy) {
+    const sortedProducts = [...this.products];
+
+    if (sortBy === "name") {
+      sortedProducts.sort((a, b) =>
+        a.NameWithoutBrand.localeCompare(b.NameWithoutBrand)
+      );
+    } else if (sortBy === "price") {
+      sortedProducts.sort((a, b) => a.FinalPrice - b.FinalPrice);
+    }
+
+    this.renderList(sortedProducts);
   }
 
   renderList(list) {
-    renderListWithTemplate(productCardTemplate, this.listElement, list);
+    renderListWithTemplate(
+      productCardTemplate,
+      this.listElement,
+      list,
+      "afterbegin",
+      true
+    );
   }
 }
