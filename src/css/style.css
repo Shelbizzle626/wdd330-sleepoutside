@@ -197,6 +197,20 @@ button {
   margin: 0.5em 0;
 }
 
+.discount-badge {
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  border-radius: 0.25em;
+  background-color: var(--secondary-color);
+  color: white;
+  font-size: var(--small-font);
+  font-weight: bold;
+}
+
+.discount-badge[hidden] {
+  display: none;
+}
+
 .card__brand {
   font-size: var(--small-font);
 }
