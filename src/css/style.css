@@ -330,3 +330,28 @@ footer {
 .cart-animate {
   animation: cart-bounce 0.6s ease;
 }
+
+
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-form input {
+  padding: 0.6rem;
+  min-width: 14rem;
+}
+
+.search-form button {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
