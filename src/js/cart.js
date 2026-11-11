@@ -46,7 +46,7 @@ function cartItemTemplate(item) {
   <button class="cart-card__remove" data-id="${item.Id}" aria-label="Remove ${item.Name} from cart">X</button>
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image}"
+      src="${item.Images.PrimaryMedium}"
       alt="${item.Name}"
     />
   </a>

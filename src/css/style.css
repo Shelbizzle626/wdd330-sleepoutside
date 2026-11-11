@@ -170,6 +170,35 @@ button {
   padding: 1rem;
 }
 
+.categories {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid var(--light-grey);
+  color: var(--dark-grey);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.category-card img {
+  width: 100px;
+  height: 100px;
+}
+
 .product-list {
   display: flex;
   flex-flow: row wrap;
@@ -272,6 +301,12 @@ button {
   .cart-card {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .category-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
