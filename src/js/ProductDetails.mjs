@@ -14,7 +14,16 @@ export default class ProductDetails {
     }
 
     async init() {
-        this.product = await this.dataSource.findProductById(this.productId);
+      this.product = await this.dataSource.findProductById(this.productId);
+      
+      // Handle a missing or wrong ?product= in the URL
+      if (!this.product) {
+        document.querySelector(".product-detail").innerHTML =
+          "<p>Sorry, that product could not be found.</p>";
+        this.product = null;
+        return;
+      }
+
         this.renderProductDetails();
         document
             .getElementById("addToCart")
@@ -25,7 +34,7 @@ export default class ProductDetails {
     addProductToCart() {
       const cartItems = getLocalStorage("so-cart") || [];
       // Is this product already in the cart?
-      const existing = cartItems.find((item) => item.Id === this.product.ID);
+      const existing = cartItems.find((item) => item.Id === this.product.Id);
 
       if (existing) {
         //Yes: add 1 to it's quantity
@@ -41,7 +50,8 @@ export default class ProductDetails {
     }
 
     renderProductDetails() {
-        const p = this.product;
+      const p = this.product;
+      document.title = 'Sleep Outside | ${p.NameWithoutBrand}';
         document.querySelector(".product-detail").innerHTML = `
       <h3>${p.Brand.Name}</h3>
       <h2 class="divider">${p.NameWithoutBrand}</h2>
