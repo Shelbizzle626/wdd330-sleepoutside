@@ -38,7 +38,7 @@ export default class ProductDetails {
 
       if (existing) {
         //Yes: add 1 to it's quantity
-        existing.Quantity = (Number(esixting.Quantity) || 1) + 1;
+        existing.Quantity = (Number(existing.Quantity) || 1) + 1;
       }
       else {
         // No: add it with a quantity of 1
@@ -55,7 +55,7 @@ export default class ProductDetails {
         document.querySelector(".product-detail").innerHTML = `
       <h3>${p.Brand.Name}</h3>
       <h2 class="divider">${p.NameWithoutBrand}</h2>
-      <img class="divider" src="${p.Image}" alt="${p.NameWithoutBrand}" />
+      <img class="divider" src="${p.Images.PrimaryLarge}" alt="${p.NameWithoutBrand}" />
       <p class="product-card__price">$${p.FinalPrice}</p>
       <p class="product__color">${p.Colors[0].ColorName}</p>
       <p class="product__description">${p.DescriptionHtmlSimple}</p>
