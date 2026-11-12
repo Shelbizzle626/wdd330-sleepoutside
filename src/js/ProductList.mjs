@@ -1,5 +1,22 @@
 import { renderListWithTemplate } from "./utils.mjs";
 
+function discountIndicatorTemplate(product) {
+  const retailPrice = Number(product.SuggestedRetailPrice);
+  const finalPrice = Number(product.FinalPrice);
+
+  if (!(retailPrice > finalPrice)) {
+    return "";
+  }
+
+  const percentOff = Math.round((1 - finalPrice / retailPrice) * 100);
+  const savings = (retailPrice - finalPrice).toFixed(2);
+
+  return `<div class="discount-indicator">
+    <span class="discount-badge">${percentOff}% OFF</span>
+    <span class="discount-savings">You save $${savings}</span>
+  </div>`;
+}
+
 function productCardTemplate(product) {
   return `<li class="product-card">
     <a href="/product_pages/?product=${product.Id}">
@@ -7,6 +24,7 @@ function productCardTemplate(product) {
       <h2 class="card__brand">${product.Brand.Name}</h2>
       <h3 class="card__name">${product.NameWithoutBrand}</h3>
       <p class="product-card__price">$${product.FinalPrice}</p>
+      ${discountIndicatorTemplate(product)}
     </a>
   </li>`;
 }
