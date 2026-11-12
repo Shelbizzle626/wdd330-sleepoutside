@@ -217,6 +217,38 @@ button {
   width: 100%;
 }
 
+/* style for product grid */
+.product-grid {
+  columns: 4;
+  column-gap: 1rem;
+  list-style-type: none;
+  text-align: center;
+}
+
+.product-grid a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--dark-grey);
+  font-size: var(--small-font);
+}
+
+.product-grid img {
+  width: min(100px, 90%);
+  height: 100px;
+  object-fit: contain;
+}
+
+.categories {
+  padding: 2rem 1rem;
+}
+
+.categories h2 {
+  margin-bottom: 1rem;
+}
+
 /* Start cart list card styles */
 .cart-card {
   display: grid;
