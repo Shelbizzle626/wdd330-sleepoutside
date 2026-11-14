@@ -28,6 +28,7 @@ body {
 
 img {
   max-width: 100%;
+  height: auto;
 }
 
 header {
@@ -219,10 +220,12 @@ button {
 
 /* style for product grid */
 .product-grid {
-  columns: 4;
-  column-gap: 1rem;
-  list-style-type: none;
-  text-align: center;
+  columns: 2;
+}
+@media screen and (min-width: 500px){
+  .product-grid {
+    columns: 4;
+  }
 }
 
 .product-grid a {
