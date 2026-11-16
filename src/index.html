@@ -9,9 +9,7 @@
   </head>
 
   <body>
-    <header class="divider" id="main-header">
-      
-    </header>
+    <header class="divider" id="main-header"></header>
     <main class="divider">
       <div class="hero">
         <img
@@ -61,21 +59,35 @@
           </li>
         </ul>
       </section>
-      
+
+      <section class="newsletter">
+        <h2>Join Our Newsletter</h2>
+        <p>Get news about new products and special deals.</p>
+        <form id="newsletter-form">
+          <label for="newsletter-email">Email</label>
+          <input
+            type="email"
+            id="newsletter-email"
+            name="email"
+            placeholder="you@example.com"
+            required
+          />
+          <button type="submit">Subscribe</button>
+        </form>
+        <p id="newsletter-message" class="newsletter-message" hidden></p>
+      </section>
     </main>
-    <footer id="main-footer">
-      
-    </footer>
+    <footer id="main-footer"></footer>
 
-  <script type="module">
-      import Alert from '/js/Alert.js';
-      import { updateCartCount } from '/js/utils.mjs';
+    <script type="module">
+      import Alert from "/js/Alert.js";
+      import { updateCartCount } from "/js/utils.mjs";
 
-      document.addEventListener('DOMContentLoaded', () => {
-          const alertSystem = new Alert();
-          alertSystem.render();
-          updateCartCount();
+      document.addEventListener("DOMContentLoaded", () => {
+        const alertSystem = new Alert();
+        alertSystem.render();
+        updateCartCount();
       });
-  </script>
+    </script>
   </body>
 </html>

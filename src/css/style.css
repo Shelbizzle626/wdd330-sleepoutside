@@ -222,7 +222,7 @@ button {
 .product-grid {
   columns: 2;
 }
-@media screen and (min-width: 500px){
+@media screen and (min-width: 500px) {
   .product-grid {
     columns: 4;
   }
@@ -366,7 +366,6 @@ footer {
   animation: cart-bounce 0.6s ease;
 }
 
-
 .search-form {
   display: flex;
   align-items: center;
@@ -391,6 +390,54 @@ footer {
   clip-path: inset(50%);
 }
 
+/* Newsletter sign up*/
+.newsletter {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  text-align: center;
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+}
+
+.newsletter form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.newsletter label {
+  width: 100%;
+}
+
+.newsletter input {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.newsletter input:invalid:not(:placeholder-shown) {
+  border-color: #d62828;
+  outline-color: #d62828;
+}
+
+.newsletter button {
+  padding: 0.6rem 1.2rem;
+  background-color: var(--secondary-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.newsletter-message {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: var(--secondary-color);
+}
 /* Header "Sign up" link */
 .account-link {
   white-space: nowrap;
