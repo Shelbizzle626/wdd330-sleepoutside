@@ -390,3 +390,80 @@ footer {
   overflow: hidden;
   clip-path: inset(50%);
 }
+
+/* Header "Sign up" link */
+.account-link {
+  white-space: nowrap;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.account-link:hover,
+.account-link:focus-visible {
+  text-decoration: underline;
+}
+
+.signup form {
+  display: grid;
+  gap: 1rem;
+  max-width: 32rem;
+}
+
+.signup fieldset {
+  display: grid;
+  gap: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.signup legend {
+  font-weight: bold;
+  padding: 0 0.25rem;
+}
+
+.signup label {
+  margin-top: 0.5rem;
+}
+
+.signup input {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.signup input:user-invalid {
+  border-color: #b00020;
+}
+
+.signup button {
+  justify-self: start;
+}
+
+.signup button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.avatar-preview {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-top: 0.5rem;
+}
+
+.signup-message {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  max-width: 32rem;
+}
+
+.signup-message.success {
+  background: #e6f4ea;
+  color: #1e5e2f;
+}
+
+.signup-message.error {
+  background: #fdecea;
+  color: #8a1c1c;
+}

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sleep Outside | Sign Up</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/signup.js" type="module"></script>
+</head>
+
+<body>
+    <header class="divider" id="main-header"></header>
+
+    <main class="divider">
+        <section class="signup">
+            <h2>Create an Account</h2>
+
+            <p id="signup-message" class="signup-message" role="alert" hidden></p>
+
+            <form id="signup-form" novalidate>
+                <fieldset>
+                    <legend>Your name</legend>
+                    <label for="fname">First name</label>
+                    <input id="fname" name="fname" autocomplete="given-name" required />
+                    <label for="lname">Last name</label>
+                    <input id="lname" name="lname" autocomplete="family-name" required />
+                </fieldset>
+
+                <fieldset>
+                    <legend>Address</legend>
+                    <label for="street">Street</label>
+                    <input id="street" name="street" autocomplete="street-address" required />
+                    <label for="city">City</label>
+                    <input id="city" name="city" autocomplete="address-level2" required />
+                    <label for="state">State</label>
+                    <input id="state" name="state" autocomplete="address-level1" required />
+                    <label for="zip">Zip</label>
+                    <input id="zip" name="zip" autocomplete="postal-code" inputmode="numeric" pattern="\d{5}(-\d{4})?"
+                        required />
+                </fieldset>
+
+                <fieldset>
+                    <legend>Login</legend>
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" autocomplete="email" required />
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" autocomplete="new-password" minlength="8"
+                        required />
+                    <label for="confirmPassword">Confirm password</label>
+                    <input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password"
+                        minlength="8" required />
+                </fieldset>
+
+                <fieldset>
+                    <legend>Avatar (optional)</legend>
+                    <label for="avatar">Image URL</label>
+                    <input id="avatar" name="avatar" type="url" placeholder="https://..." />
+                    <img id="avatar-preview" class="avatar-preview" alt="Avatar preview" hidden />
+                </fieldset>
+
+                <button type="submit">Create account</button>
+            </form>
+        </section>
+    </main>
+
+    <footer id="main-footer">&copy;NOT a real business</footer>
+</body>
+
+</html>
