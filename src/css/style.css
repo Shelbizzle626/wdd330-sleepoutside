@@ -218,6 +218,25 @@ button {
   width: 100%;
 }
 
+.product-detail__add {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.product-detail__add button {
+  margin: 0;
+}
+
+.wishlist-button {
+  background-color: var(--tertiary-color);
+}
+
+.wishlist-button[aria-pressed="true"] {
+  background-color: var(--dark-grey);
+}
+
 /* style for product grid */
 .product-grid {
   columns: 2;

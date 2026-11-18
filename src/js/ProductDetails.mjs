@@ -28,6 +28,9 @@ export default class ProductDetails {
         document
             .getElementById("addToCart")
             .addEventListener("click", this.addProductToCart.bind(this));
+        document
+            .getElementById("wishlistButton")
+            .addEventListener("click", this.toggleWishlist.bind(this));
         updateCartCount();
     }
 
@@ -49,9 +52,35 @@ export default class ProductDetails {
       updateCartCount();
     }
 
+    toggleWishlist() {
+      const wishlist = getLocalStorage("so-wishlist") || [];
+      const productIndex = wishlist.findIndex(
+        (item) => item.Id === this.product.Id,
+      );
+
+      if (productIndex === -1) {
+        wishlist.push(this.product);
+      } else {
+        wishlist.splice(productIndex, 1);
+      }
+
+      setLocalStorage("so-wishlist", wishlist);
+      this.updateWishlistButton(productIndex === -1);
+    }
+
+    updateWishlistButton(isWishlisted) {
+      const button = document.getElementById("wishlistButton");
+      button.textContent = isWishlisted
+        ? "Remove from Wishlist"
+        : "Add to Wishlist";
+      button.setAttribute("aria-pressed", String(isWishlisted));
+    }
+
     renderProductDetails() {
       const p = this.product;
-      document.title = 'Sleep Outside | ${p.NameWithoutBrand}';
+      const wishlist = getLocalStorage("so-wishlist") || [];
+      const isWishlisted = wishlist.some((item) => item.Id === p.Id);
+      document.title = `Sleep Outside | ${p.NameWithoutBrand}`;
         document.querySelector(".product-detail").innerHTML = `
       <h3>${p.Brand.Name}</h3>
       <h2 class="divider">${p.NameWithoutBrand}</h2>
@@ -61,6 +90,10 @@ export default class ProductDetails {
       <p class="product__description">${p.DescriptionHtmlSimple}</p>
       <div class="product-detail__add">
         <button id="addToCart" data-id="${p.Id}">Add to Cart</button>
+        <button id="wishlistButton" class="wishlist-button" type="button"
+          aria-pressed="${isWishlisted}">
+          ${isWishlisted ? "Remove from Wishlist" : "Add to Wishlist"}
+        </button>
       </div>
     `;
     }
