@@ -2,6 +2,7 @@ import {
     setLocalStorage,
     getLocalStorage,
     updateCartCount,
+    alertMessage,
   } from "./utils.mjs";
 
 export default class ProductDetails {
@@ -49,6 +50,7 @@ export default class ProductDetails {
 
       setLocalStorage("so-cart", cartItems);
       updateCartCount();
+      alertMessage(`${this.product.NameWithoutBrand} added to cart!`);
     }
 
     toggleWishlist() {
