@@ -121,5 +121,9 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
+document.querySelector("#checkout-btn").addEventListener("click", () => {
+  window.location.href = "/checkout/index.html";
+});
+
 renderCartContents();
 updateCartCount();
