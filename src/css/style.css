@@ -533,3 +533,65 @@ footer {
   background: #fdecea;
   color: #8a1c1c;
 }
+
+/* Checkout / utility alerts */
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background-color: var(--primary-color);
+  color: var(--dark-grey);
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0 1rem;
+  border: 1px solid var(--tertiary-color);
+}
+
+.alert p {
+  margin: 0;
+  padding: 0;
+}
+
+.alert span {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0 0.35rem;
+}
+
+.success-message {
+  max-width: 40rem;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.success-message a {
+  color: var(--secondary-color);
+  font-weight: bold;
+}
+
+#checkout-form fieldset {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--light-grey);
+}
+
+#checkout-form label {
+  margin-top: 0.5rem;
+}
+
+#checkout-form input {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+#checkout-form input:user-invalid {
+  border-color: #b00020;
+}
+
+.order__summary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.35rem 1.5rem;
+}

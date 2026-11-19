@@ -80,12 +80,9 @@
     <footer id="main-footer"></footer>
 
     <script type="module">
-      import Alert from "/js/Alert.js";
       import { updateCartCount } from "/js/utils.mjs";
 
       document.addEventListener("DOMContentLoaded", () => {
-        const alertSystem = new Alert();
-        alertSystem.render();
         updateCartCount();
       });
     </script>

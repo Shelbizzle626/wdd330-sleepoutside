@@ -1,8 +1,8 @@
 import { updateCartCount, getParam } from "./utils.mjs";
-import ProductData from "./ExternalServices.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductDetails from "./ProductDetails.mjs";
 
-const dataSource = new ProductData("tents");
+const dataSource = new ExternalServices();
 const productId = getParam("product");
 const productPage = new ProductDetails(productId, dataSource);
 
