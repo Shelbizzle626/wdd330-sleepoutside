@@ -595,3 +595,48 @@ footer {
   grid-template-columns: 1fr auto;
   gap: 0.35rem 1.5rem;
 }
+
+#quick-view-modal {
+  width: min(600px, 90vw);
+  max-height: 85vh;
+  margin: auto;
+  padding: 1.5rem;
+  overflow-y: auto;
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+}
+
+#quick-view-modal::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+#quick-view-modal form {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+#quick-view-modal button {
+  margin: 0;
+  padding: 0.5rem 1rem;
+}
+
+#quick-view-title {
+  margin-bottom: 1rem;
+}
+
+#quick-view-content img {
+  display: block;
+  width: 200px;
+  max-width: 100%;
+  margin: 0 auto 1rem;
+}
+
+#quick-view-content p {
+  padding: 0.5rem 0;
+}
+
+#quick-view-content > div {
+  margin: 1rem 0;
+  line-height: 1.5;
+}
