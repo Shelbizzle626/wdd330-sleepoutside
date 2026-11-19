@@ -26,6 +26,7 @@ function productCardTemplate(product) {
       <p class="product-card__price">$${product.FinalPrice}</p>
       ${discountIndicatorTemplate(product)}
     </a>
+    <button type="button" class="quick-view-button" data-id="${product.Id}">Quick View</button>
   </li>`;
 }
 
@@ -42,10 +43,46 @@ export default class ProductList {
     // Display products
     this.renderList(this.products);
 
+    this.listElement.addEventListener("click", (event) => {
+      const button = event.target.closest(".quick-view-button");
+      if (button) {
+        this.showQuickView(button.dataset.id);
+      }
+    });
+
     // Add sorting (from your branch)
     document.querySelector("#product-sort").addEventListener("change", (event) => {
       this.sortList(event.target.value);
     });
+  }
+
+  showQuickView(productId) {
+    const product = this.products.find((item) => item.Id === productId);
+
+    if (!product) return;
+
+    const modal = document.querySelector("#quick-view-modal");
+
+    modal.querySelector("#quick-view-title").textContent =
+      product.NameWithoutBrand;
+
+    modal.querySelector("#quick-view-content").innerHTML = `
+      <img
+        src="${product.Images.PrimaryMedium}"
+        alt="${product.NameWithoutBrand}"
+      />
+      <p>${product.Brand.Name}</p>
+      <p>$${Number(product.FinalPrice).toFixed(2)}</p>
+      <p>${product.Colors[0].ColorName}</p>
+      <div>${product.DescriptionHtmlSimple || ""}</div>
+      <p>$${Number(product.FinalPrice).toFixed(2)}</p>
+      ${discountIndicatorTemplate(product)}
+      <a href="/product_pages/?product=${product.Id}">
+        View full product details
+      </a>
+    `;
+
+    modal.showModal();
   }
 
   sortList(sortBy) {
