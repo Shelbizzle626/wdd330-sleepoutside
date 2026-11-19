@@ -9,6 +9,7 @@
 
   <title>Sleep Outside | Checkout</title>
   <script src="../js/main.js" type="module"></script>
+  <script type="module" src="../js/checkout.js"></script>
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 
@@ -20,6 +21,106 @@
   <main class="divider">
     <section class="products">
       <h2>Review & Place your Order</h2>
+
+      <form id="checkout-form">
+        <fieldset>
+          <legend>Customer Information</legend>
+          <label for="fName">First Name:</label>
+          <input 
+            type="text" 
+            id="fName" 
+            name="fName" 
+            required 
+          />
+
+          <label for="lName">Last Name:</label>
+          <input 
+            type="text" 
+            id="lName" 
+            name="lName" 
+            required
+          />
+
+          <label for="address">Address:</label>
+          <input 
+            type="text" 
+            id="address" 
+            name="address" 
+            required
+          />
+
+          <label for="city">City:</label>
+          <input  
+            type="text" 
+            id="city" 
+            name="city" 
+            required
+          />
+
+          <label for="state">State:</label>
+          <input
+            type="text" 
+            id="state" 
+            name="state" 
+            required
+          />
+
+          <label for="zip">Zip Code:</label>
+          <input 
+            type="text" 
+            id="zip" 
+            name="zip" 
+            required
+          />
+        </fieldset>
+        <fieldset>
+          <legend>Payment Information</legend>
+          <label for="cardNumber">Card Number:</label>
+          <input 
+            type="text" 
+            id="cardNumber" 
+            name="cardNumber" 
+            required
+          />
+
+          <label for="expDate">Expiration Date:</label>
+          <input 
+            type="text" 
+            id="expDate" 
+            name="expDate" 
+            placeholder="MM/YY"
+            required
+          />
+
+          <label for="cvv">CVV:</label>
+          <input 
+            type="text" 
+            id="cvv" 
+            name="cvv" 
+            required
+          />
+
+        </fieldset>
+
+        <fieldset class="checkout-summary">
+          <legend>Order Summary</legend>
+
+          <div class="order__summary">
+            <div>Items</div>
+            <div id="num-items"></div>
+            <div>Subtotal</div>
+            <div id="cartTotal"></div>
+            <div>Tax</div>
+            <div id="tax"></div>
+            <div>Shipping</div>
+            <div id="shipping"></div>
+            <div>Total</div>
+            <div id="orderTotal"></div>
+          </div>
+        </fieldset>
+
+        <button type="submit">Checkout</button>
+      </form>
     </section>
   </main>
 
