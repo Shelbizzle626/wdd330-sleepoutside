@@ -80,7 +80,7 @@ export default class CheckoutProcess {
     order.orderDate = new Date().toISOString();
     order.orderTotal = this.orderTotal.toFixed(2);
     order.tax = this.tax.toFixed(2);
-    order.shipping = this.shipping.toFixed(2);
+    order.shipping = this.shipping;
     order.items = packageItems(this.list);
     
     try {
