@@ -108,7 +108,7 @@ function cartItemTemplate(item) {
   <a href="#">
     <h2 class="card__name">${item.Name}</h2>
   </a>
-  <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+  <p class="cart-card__color">${item.SelectedColor || item.Colors[0].ColorName}</p>
   <label class="cart-card__quantity">
     qty:
     <input type="number" class="cart-card__qty-input" data-id="${item.Id}"

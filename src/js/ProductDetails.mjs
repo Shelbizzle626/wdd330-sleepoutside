@@ -11,6 +11,7 @@ export default class ProductDetails {
         this.productId = productId;
         this.product = {};
         this.dataSource = dataSource;
+        this.selectedColor= null;
     }
 
     async init() {
@@ -23,6 +24,8 @@ export default class ProductDetails {
         this.product = null;
         return;
       }
+        this.selectedColor= (this.product.colors || [])[0] || null;
+
 
         this.renderProductDetails();
         document
@@ -31,13 +34,63 @@ export default class ProductDetails {
         document
             .getElementById("wishlistButton")
             .addEventListener("click", this.toggleWishlist.bind(this));
+        this.wireColorSwatches();
         updateCartCount();
     }
+
+
+    renderColorPicker() {
+    const colors = this.product.colors || [];
+
+    // One color (or none): just show the name, no picker
+    if (colors.length < 2) {
+      return colors[0]
+        ? `<p class="product__color">${colors[0].ColorName}</p>`
+        : "";
+    }
+
+    const swatches = colors
+      .map(
+        (c, i) => `
+        <div class="swatch">
+          <input type="radio" name="color" id="color-${i}"
+                 value="${i}" ${i === 0 ? "checked" : ""} />
+          <label for="color-${i}" title="${c.ColorName}">
+            <img src="${c.ColorChipImageSrc}" alt="${c.ColorName}" />
+          </label>
+        </div>`,
+      )
+      .join("");
+
+    return `
+      <fieldset class="color-picker">
+        <legend>Color: <span id="colorName">${colors[0].ColorName}</span></legend>
+        <div class="swatches">${swatches}</div>
+      </fieldset>`;
+  }
+
+  wireColorSwatches() {
+    document.querySelectorAll('input[name="color"]').forEach((input) => {
+      input.addEventListener("change", () => {
+        this.selectedColor = this.product.Colors[Number(input.value)];
+        document.getElementById("colorName").textContent =
+          this.selectedColor.ColorName;
+
+        // Swap the main image if this color has its own preview image
+        if (this.selectedColor.ColorPreviewImageSrc) {
+          document.getElementById("productImage").src =
+            this.selectedColor.ColorPreviewImageSrc;
+        }
+      });
+    });
+  }
+
 
     addProductToCart() {
       const cartItems = getLocalStorage("so-cart") || [];
       // Is this product already in the cart?
-      const existing = cartItems.find((item) => item.Id === this.product.Id);
+      const existing = cartItems.find((item) => item.Id === this.product.Id && item.SelectedColor === colorName,);
+      const colorName = this.selectedColor ? this.selectedColor.ColorName : null;
 
       if (existing) {
         //Yes: add 1 to it's quantity
@@ -45,7 +98,7 @@ export default class ProductDetails {
       }
       else {
         // No: add it with a quantity of 1
-        cartItems.push({ ...this.product, Quantity: 1 });
+        cartItems.push({ ...this.product, SelectedColor: colorName, Quantity: 1 });
       }
 
       setLocalStorage("so-cart", cartItems);
@@ -86,6 +139,7 @@ export default class ProductDetails {
       <h2 class="divider">${p.NameWithoutBrand}</h2>
       <img class="divider" src="${p.Images.PrimaryLarge}" alt="${p.NameWithoutBrand}" />
       <p class="product-card__price">$${p.FinalPrice}</p>
+      ${this.renderColorPicker()}
       <p class="product__color">${p.Colors[0].ColorName}</p>
       <p class="product__description">${p.DescriptionHtmlSimple}</p>
       <div class="product-detail__add">
