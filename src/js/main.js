@@ -14,3 +14,17 @@ if (newsletterForm) {
     newsletterForm.reset();
   });
 }
+
+const registerBanner = document.getElementById("register-banner");
+const closeBanner = document.getElementById("close-banner");
+
+if (registerBanner && !localStorage.getItem("so-visited")) {
+  registerBanner.hidden = false;
+  localStorage.setItem("so-visited", true);
+}
+
+if (closeBanner) {
+  closeBanner.addEventListener("click", () => {
+    registerBanner.hidden = true;
+  });
+}
