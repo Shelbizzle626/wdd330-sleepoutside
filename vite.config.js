@@ -24,6 +24,10 @@ export default defineConfig({
           __dirname,
           "src/product_pages/northface-talus-4.html",
         ),
+        backpackCarousel: resolve(
+  __dirname,
+  "src/product_pages/backpack-carousel.html",
+),
       },
     },
   },
